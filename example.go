@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/dlasky/gotk3-layershell/layershell"
+	"github.com/brotholo/gotk3-layershell/layershell"
 	//  "github.com/gotk3/gotk3/gtk"
 	"github.com/diamondburned/gotk4/pkg/gtk/v4"
 	"log"
