@@ -15,7 +15,7 @@ import (
 type LayerShellEdgeFlags int
 
 const (
-	LAYER_SHELL_EDGE_LEFT   LayerShellEdgeFlags = iota
+	LAYER_SHELL_EDGE_LEFT LayerShellEdgeFlags = iota
 	LAYER_SHELL_EDGE_RIGHT
 	LAYER_SHELL_EDGE_TOP
 	LAYER_SHELL_EDGE_BOTTOM
@@ -27,13 +27,13 @@ const (
 	LAYER_SHELL_LAYER_BACKGROUND LayerShellLayerFlags = iota
 	LAYER_SHELL_LAYER_BOTTOM
 	LAYER_SHELL_LAYER_TOP
-	LAYER_SHELL_LAYER_OVERLAY    
+	LAYER_SHELL_LAYER_OVERLAY
 )
 
 type LayerShellKeyboardMode int
 
 const (
-	LAYER_SHELL_KEYBOARD_MODE_NONE LayerShellKeyboardMode= iota
+	LAYER_SHELL_KEYBOARD_MODE_NONE LayerShellKeyboardMode = iota
 	LAYER_SHELL_KEYBOARD_MODE_EXCLUSIVE
 	LAYER_SHELL_KEYBOARD_MODE_ON_DEMAND
 	LAYER_SHELL_KEYBOARD_MODE_ENTRY_NUMBER
@@ -42,22 +42,24 @@ const (
 func nativeWindow(window *gtk.Window) *C.GtkWindow {
 	w := window.Native()
 	wp := (*C.GtkWindow)(unsafe.Pointer(w))
-	return wp;
+	return wp
 }
 
 func nativeMonitor(monitor *gdk.Monitor) *C.GdkMonitor {
 	m := monitor.Native()
 	mp := (*C.GdkMonitor)(unsafe.Pointer(m))
-	return mp;
+	return mp
 }
 
 func boolConv(b bool) C.int {
-	if (b) { return C.int(1)}
+	if b {
+		return C.int(1)
+	}
 	return C.int(0)
 }
 
 func InitForWindow(window *gtk.Window) {
-	w := nativeWindow(window);
+	w := nativeWindow(window)
 	C.gtk_layer_init_for_window(w)
 }
 
