@@ -5,8 +5,10 @@ package layershell
 // #include "gtk-layer-shell.h"
 import "C"
 import (
-	"github.com/gotk3/gotk3/gdk"
-	"github.com/gotk3/gotk3/gtk"
+	//  "github.com/brotholo/gotk4/gdk"
+	"github.com/diamondburned/gotk4/pkg/gdk/v4"
+	"github.com/diamondburned/gotk4/pkg/gtk/v4"
+	//  "github.com/gotk3/gotk3/gtk"
 	"unsafe"
 )
 
