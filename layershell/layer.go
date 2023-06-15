@@ -1,13 +1,14 @@
 package layershell
 
-// #cgo pkg-config: gtk+-3.0 gtk-layer-shell-0
+// #cgo pkg-config: gtk4 gtk4-layer-shell-0
 // #include <gtk/gtk.h>
-// #include "gtk-layer-shell.h"
+// #include "gtk4-layer-shell.h"
 import "C"
 import (
 	//  "github.com/brotholo/gotk4/gdk"
 	"github.com/diamondburned/gotk4/pkg/gdk/v4"
 	"github.com/diamondburned/gotk4/pkg/gtk/v4"
+
 	//  "github.com/gotk3/gotk3/gtk"
 	"unsafe"
 )
@@ -40,13 +41,13 @@ const (
 )
 
 func nativeWindow(window *gtk.Window) *C.GtkWindow {
-	w := window.Native()
+	w := window
 	wp := (*C.GtkWindow)(unsafe.Pointer(w))
 	return wp
 }
 
 func nativeMonitor(monitor *gdk.Monitor) *C.GdkMonitor {
-	m := monitor.Native()
+	m := monitor
 	mp := (*C.GdkMonitor)(unsafe.Pointer(m))
 	return mp
 }
