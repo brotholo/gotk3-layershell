@@ -41,10 +41,21 @@ const (
 )
 
 func nativeWindow(window *gtk.Window) *C.GtkWindow {
-	w := window
-	wp := (*C.GtkWindow)(unsafe.Pointer(w))
+	//  w := window
+	//  var w string
+	//  C.pass_pointer(pointer.Save(&s))
+	w := window.Widget.Native()
+	//  wp := (*C.GtkWindow)(pointer.Save(w))
+	wp := (*C.GtkWindow)(unsafe.Pointer(&w))
 	return wp
 }
+
+//  func InitForWindow(window *gtk.Window) {
+//  //  w := nativeWindow(window)
+//  w := window.Widget.Native()
+//  //  wp := (*C.GtkWindow)(unsafe.Pointer(w))
+//  wp := (*C.GtkWindow)(pointer.Save(w))
+//  C.gtk_layer_init_for_window(wp)
 
 func nativeMonitor(monitor *gdk.Monitor) *C.GdkMonitor {
 	m := monitor
@@ -59,9 +70,54 @@ func boolConv(b bool) C.int {
 	return C.int(0)
 }
 
+//  #include <stdio.h>
+
+//  typedef int* pInt;
+
+//  void foo(pInt p[]) { // you probably wanna pass a len to the function.
+//  *p[0] = 100;
+//  printf("foo()\n");
+//  }
+
+//  */
+//  import "C"
+//  import "unsafe"
+
+//  func main() {
+//  var (
+//  i, sz  = 0, 2
+//  arr    = (*C.pInt)(C.malloc(C.size_t(sz)))
+//  ps     = (*[100000]C.pInt)(unsafe.Pointer(arr))[:sz:sz]
+//  p1, p2 = (C.pInt)(unsafe.Pointer(&i)), (C.pInt)(unsafe.Pointer(&i))
+//  )
+//  ps[0], ps[1] = p1, p2
+//  C.foo(arr)
+//  C.free(unsafe.Pointer(arr))
+//  println("i", i)
+//  }
+
+//  typedef int* pInt;
+
+//  void foo(pInt p[]) {
+//  printf("foo()\n");
+//  }
+//  */
+//  import "C"
+//  import "unsafe"
+
+// func main() {
+// var i C.int
+// var p1 C.pInt = (*C.int)(unsafe.Pointer(&i))
+// var p2 C.pInt = (*C.int)(unsafe.Pointer(&i))
+// var ps []C.pInt = []C.pInt{p1, p2}
+// C.foo(unsafe.Pointer(&ps[0]))
+// }
+//
+//	func InitForWindow(window *gtk.Window) *gtk.Window {
 func InitForWindow(window *gtk.Window) {
 	w := nativeWindow(window)
 	C.gtk_layer_init_for_window(w)
+	//  return pointer.Restore(w)
 }
 
 func SetLayer(window *gtk.Window, layer LayerShellLayerFlags) {
